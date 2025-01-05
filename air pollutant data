@@ -14,3 +14,8 @@ from sklearn.linear_model import ElasticNet
 from sklearn.cross_decomposition import PLSRegression
 from sklearn.decomposition import PCA
 from sklearn.metrics import r2_score
+
+# Step 1: Load and prepare your dataset
+# Assuming you have a CSV file named 'data.csv'
+data = pd.read_csv('AQI Compiled Data csv.csv')
+data.head()
