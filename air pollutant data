@@ -19,3 +19,10 @@ from sklearn.metrics import r2_score
 # Assuming you have a CSV file named 'data.csv'
 data = pd.read_csv('AQI Compiled Data csv.csv')
 data.head()
+
+# Splitting into independent variables (X) and dependent variables (Y)
+X = data[['Precipitation (mm/d)', 'Specific Humidity (Mass fraction)',
+       'Temperature (k)', 'Wind_f_inst (m/s)', 'Air Pressure (Pa)']]
+Y = data[['CO column number density (micromole/m^2)', 'NO2 column number density (micromole/m^2)',
+       'SO2 column number density (micromole/m^2)',
+       'O3 column number density (micromole/m^2)', 'Optical Depth 047']]
