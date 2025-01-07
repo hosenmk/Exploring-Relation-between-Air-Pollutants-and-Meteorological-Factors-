@@ -26,3 +26,52 @@ X = data[['Precipitation (mm/d)', 'Specific Humidity (Mass fraction)',
 Y = data[['CO column number density (micromole/m^2)', 'NO2 column number density (micromole/m^2)',
        'SO2 column number density (micromole/m^2)',
        'O3 column number density (micromole/m^2)', 'Optical Depth 047']]
+
+# Plot histograms for each variable
+plt.figure(figsize=(10, 6))
+plt.hist(X['Precipitation (mm/d)'], bins=30, alpha=0.5, label='Precipitation')
+plt.title('Histogram of a Single Variable')
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Plot histograms for each variable
+plt.figure(figsize=(10, 6))
+plt.hist(X['Specific Humidity (Mass fraction)'], bins=30, alpha=0.5, label='Specific Humidity (Mass fraction)')
+plt.title('Histogram of Specific Humidity')
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+
+# Plot histograms for each variable
+plt.figure(figsize=(10, 6))
+plt.hist(X['Temperature (k)'], bins=30, alpha=0.5, label='Temperature (k)')
+plt.title('Histogram of Temperature (k)')
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Plot histograms for each variable
+plt.figure(figsize=(10, 6))
+plt.hist(X['Wind_f_inst (m/s)'], bins=30, alpha=0.5, label='Wind_f_inst (m/s)')
+plt.title('Histogram of Wind_f_inst (m/s)')
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Plot histograms for each variable
+plt.figure(figsize=(10, 6))
+plt.hist(X['Air Pressure (Pa)'], bins=30, alpha=0.5, label='Air Pressure (Pa)')
+plt.title('Histogram of a Air Pressure (Pa)')
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+plt.grid(True)
+plt.show()
+
+# Perform Shapiro-Wilk test
+statistic, p_value = stats.shapiro(X['Precipitation (mm/d)'])
