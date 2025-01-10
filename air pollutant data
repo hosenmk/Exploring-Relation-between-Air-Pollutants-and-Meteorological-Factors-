@@ -89,6 +89,21 @@ else:
     print("The sample does not look Gaussian (reject H0)")
 
 
+# Perform Shapiro-Wilk test
+statistic, p_value = stats.shapiro(X['Specific Humidity (Mass fraction)'])
+
+# Print the results
+print("Shapiro-Wilk Test:")
+print(f"Test Statistic: {statistic}")
+print(f"P-value: {p_value}")
+
+# Interpret the results
+alpha = 0.05
+if p_value > alpha:
+    print("The sample looks Gaussian (fail to reject H0)")
+else:
+    print("The sample does not look Gaussian (reject H0)")
+
 
 
 
