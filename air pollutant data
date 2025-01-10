@@ -195,5 +195,9 @@ print("Coefficients:", ridge_model.coef_)
 print("R-squared:", r2)
 print("")
 
-
+# Calculate R-squared
+# Predictions
+y_pred = ridge_model.predict(X_train_scaled)
+r2 = r2_score(Y_train, y_pred)
+print("R-squared:", r2)
 
