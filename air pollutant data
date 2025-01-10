@@ -152,6 +152,12 @@ else:
     print("The sample does not look Gaussian (reject H0)")
 
 
+correlation_matrix = X.corr()
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Correlation Matrix')
+plt.show()
+
 
 
 
