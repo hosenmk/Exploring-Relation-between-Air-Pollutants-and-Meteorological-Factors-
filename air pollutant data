@@ -183,17 +183,17 @@ for col in Y_train.columns:
     ridge_model = Ridge(alpha=alpha)
     ridge_model.fit(X_train_scaled, Y_train[col])
 
-    # Predictions
-    y_pred = ridge_model.predict(X_train_scaled)
+# Predictions
+y_pred = ridge_model.predict(X_train_scaled)
 
-    # Calculate R-squared
-    r2 = r2_score(Y_train[col], y_pred)
+# Calculate R-squared
+r2 = r2_score(Y_train[col], y_pred)
 
-    print(f"Dependent Variable: {col}")
-    print("Intercept:", ridge_model.intercept_)
-    print("Coefficients:", ridge_model.coef_)
-    print("R-squared:", r2)
-    print("")
+print(f"Dependent Variable: {col}")
+print("Intercept:", ridge_model.intercept_)
+print("Coefficients:", ridge_model.coef_)
+print("R-squared:", r2)
+print("")
 
 
 
