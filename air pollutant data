@@ -161,6 +161,12 @@ plt.show()
 # Step 2: Split the dataset into training and testing sets
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
+# Perform multivariate multiple linear regression separately for each dependent variable
+for col in Y_train.columns:
+    model = sm.OLS(Y_train[col], sm.add_constant(X_train)).fit()
+    print(f"Dependent Variable: {col}")
+    print(model.summary())
+    print("")
 
 
 
