@@ -210,15 +210,15 @@ alpha = 1.0  # You can adjust this parameter based on your requirement
 l1_ratio = 0.5  # Mixing parameter that controls the balance between L1 and L2 penalties
 
 for col in Y_train.columns:
-    # Fit the ElasticNet regression model
-    elasticnet_model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
-    elasticnet_model.fit(X_train_scaled, Y_train[col])
+# Fit the ElasticNet regression model
+elasticnet_model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
+elasticnet_model.fit(X_train_scaled, Y_train[col])
 
-    print(f"Dependent Variable: {col}")
-    print("Intercept:", elasticnet_model.intercept_)
-    print("Coefficients:", elasticnet_model.coef_)
-    print("")
-  print(model_summary)
+print(f"Dependent Variable: {col}")
+print("Intercept:", elasticnet_model.intercept_)
+print("Coefficients:", elasticnet_model.coef_)
+print("")
+print(model_summary)
 
 
 # Define ElasticNet model
