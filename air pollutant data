@@ -326,3 +326,11 @@ plt.xticks(np.arange(1, pca.n_components_ + 1))
 plt.grid(True)
 plt.show()
 
+# Apply Box-Cox transformation
+# Load your data into a pandas DataFrame (assuming it's stored in X)
+# Replace 'Precipitation (mm/d)' with the actual name of your column
+X['Precipitation (mm/d)'] += 1  # Add 1 to shift the data, making it positive
+
+# Apply Box-Cox transformation
+transformed_data_precip, lambda_value = stats.boxcox(X['Precipitation (mm/d)'])
+
