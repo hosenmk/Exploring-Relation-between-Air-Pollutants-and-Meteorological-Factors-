@@ -163,10 +163,10 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 
 # Perform multivariate multiple linear regression separately for each dependent variable
 for col in Y_train.columns:
-    model = sm.OLS(Y_train[col], sm.add_constant(X_train)).fit()
-    print(f"Dependent Variable: {col}")
-    print(model.summary())
-    print("")
+model = sm.OLS(Y_train[col], sm.add_constant(X_train)).fit()
+print(f"Dependent Variable: {col}")
+print(model.summary())
+print("")
 
 
 # Assuming X_train and Y_train are your training data for independent and dependent variables respectively
@@ -179,9 +179,9 @@ X_train_scaled = scaler.fit_transform(X_train)
 alpha = 1.0  # You can adjust this parameter based on your requirement
 
 for col in Y_train.columns:
-    # Fit the Ridge regression model
-    ridge_model = Ridge(alpha=alpha)
-    ridge_model.fit(X_train_scaled, Y_train[col])
+# Fit the Ridge regression model
+ridge_model = Ridge(alpha=alpha)
+ridge_model.fit(X_train_scaled, Y_train[col])
 
 # Predictions
 y_pred = ridge_model.predict(X_train_scaled)
@@ -277,4 +277,34 @@ model_summary['F1 Score'] = f1
 
 print("\nModel Summary:")
 print(model_summary)
+
+# Define the number of components for PLS regression (experiment with different values)
+n_components = 5
+
+# Create a PLS regression object
+pls = PLSRegression(n_components=n_components)
+
+# Fit the model on the training data (assuming you have already split into training and testing sets)
+pls.fit(X_train, Y_train)
+
+# Get coefficients for each dependent variable
+coefficients = pls.coef_
+
+# Print the coefficients in a pandas DataFrame for better organization
+coefficient_df = pd.DataFrame(coefficients.T, columns=Y.columns, index=X.columns)
+print("Coefficients:")
+print(coefficient_df)
+
+# Predict on the testing data (assuming you have a testing set)
+y_pred = pls.predict(X_test)
+
+# Calculate R-squared score for each dependent variable
+r2_scores = []
+for i in range(Y.shape[1]):
+  r2_scores.append(r2_score(Y_test.iloc[:, i], y_pred[:, i]))
+
+# Print R-squared scores in a pandas Series for easy access
+r2_series = pd.Series(r2_scores, index=Y.columns)
+print("R-squared Values:")
+print(r2_series)
 
