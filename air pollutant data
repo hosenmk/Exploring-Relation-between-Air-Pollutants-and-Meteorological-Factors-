@@ -350,3 +350,5 @@ plt.show()
 
 print("Lambda value:", lambda_value)
 
+# Apply Box-Cox transformation
+transformed_data_hum, lambda_value = stats.boxcox(X['Specific Humidity (Mass fraction)'])
