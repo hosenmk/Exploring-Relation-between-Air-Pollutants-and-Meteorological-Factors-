@@ -201,3 +201,80 @@ y_pred = ridge_model.predict(X_train_scaled)
 r2 = r2_score(Y_train, y_pred)
 print("R-squared:", r2)
 
+# Standardize the features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+
+# Set the alpha value for ElasticNet regression
+alpha = 1.0  # You can adjust this parameter based on your requirement
+l1_ratio = 0.5  # Mixing parameter that controls the balance between L1 and L2 penalties
+
+for col in Y_train.columns:
+    # Fit the ElasticNet regression model
+    elasticnet_model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
+    elasticnet_model.fit(X_train_scaled, Y_train[col])
+
+    print(f"Dependent Variable: {col}")
+    print("Intercept:", elasticnet_model.intercept_)
+    print("Coefficients:", elasticnet_model.coef_)
+    print("")
+  print(model_summary)
+
+
+# Define ElasticNet model
+alpha = 0.5  # Regularization strength
+l1_ratio = 0.5  # Ratio of L1 to L2 regularization (1 for Lasso, 0 for Ridge)
+elastic_net = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
+
+y_train_CO = Y_train['CO column number density (micromole/m^2)']
+# Fit the model
+elastic_net.fit(X_train, y_train_CO)
+
+# Make predictions
+y_pred = elastic_net.predict(X_test)
+
+# Calculate Mean Squared Error
+mse = mean_squared_error(Y_test['CO column number density (micromole/m^2)'], y_pred)
+print("Mean Squared Error:", mse)
+
+# Model Summary
+model_summary = pd.DataFrame({
+    'Feature': ['Intercept'] + [f'X{i+1}' for i in range(5)],
+    'Coefficient': [elastic_net.intercept_] + list(elastic_net.coef_)
+})
+print("\nModel Summary:")
+print(model_summary)
+
+# Standardize the features
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Fit PLS regression model
+n_components = 3  # Number of components to keep
+pls = PLSRegression(n_components=n_components)
+pls.fit(X_train_scaled, Y_train)
+
+# Make predictions
+Y_pred = pls.predict(X_test_scaled)
+
+# Calculate Mean Squared Error
+mse = mean_squared_error(Y_test, Y_pred)
+
+# Calculate R-squared
+r_squared = r2_score(Y_test, Y_pred)
+
+# Calculate F1 Score (You need to specify the exact way you want to calculate F1 score as it's typically used for classification tasks)
+# Here, we'll just set it to 0 as we're dealing with regression
+f1 = 0
+
+# PLS model summary
+coefficients = pls.coef_
+model_summary = pd.DataFrame(coefficients, columns=Y.columns, index=X.columns)
+model_summary['Mean Squared Error'] = mse
+model_summary['R-squared'] = r_squared
+model_summary['F1 Score'] = f1
+
+print("\nModel Summary:")
+print(model_summary)
+
