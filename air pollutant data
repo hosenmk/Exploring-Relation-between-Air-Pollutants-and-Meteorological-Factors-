@@ -377,3 +377,23 @@ plt.xlabel('Value')
 plt.ylabel('Frequency')
 plt.show()
 
+# Apply Box-Cox transformation
+transformed_data_wind, lambda_value = stats.boxcox(X['Wind_f_inst (m/s)'])
+
+# Plot original and transformed data
+fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+
+# Original data histogram
+axs[0].hist(X['Wind_f_inst (m/s)'], bins=20, color='skyblue', edgecolor='black', alpha=0.7)
+axs[0].set_title('Original Data')
+
+# Transformed data histogram
+axs[1].hist(transformed_data_wind, bins=20, color='lightgreen', edgecolor='black', alpha=0.7)
+axs[1].set_title('Box-Cox Transformed Data')
+
+plt.tight_layout()
+plt.show()
+
+print("Lambda value:", lambda_value)
+
+
