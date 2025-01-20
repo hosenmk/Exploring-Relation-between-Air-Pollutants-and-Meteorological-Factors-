@@ -369,4 +369,11 @@ plt.show()
 
 print("Lambda value:", lambda_value)
 
+log_data = np.log(X['Temperature (k)'])
+
+plt.hist(log_data, bins=30, density=True, alpha=0.6, color='g')
+plt.title('Histogram of Transformed Data')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
 
